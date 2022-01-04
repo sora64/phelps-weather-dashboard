@@ -9,24 +9,24 @@
 </head>
 <body>
     <div id="headerContainer" class="row">
-        <header id="header" class=" bg-primary text-center col-12">
+        <header id="header" class="bg-primary text-center col-12">
             <h1 id="headerText" class="my-0 p-3 h1 font-weight-bold text-white">Weather Dashboard</h1>
         </header>
     </div>
     <main class="row">
-        <div id="citiesEL" class="col-4 col-md-3 vh-100 text-start">
-            <div id="citySearchEL" class="p-3 border-bottom border-dark">
-                <form class="form-group">
-                    <label for="City Search"><h3 class="font-weight-bold">Search for a City:</h3></label>
-                    <input id="citySearchInputEl" class="form-control font-weight-bold text-center" placeholder="Richmond" rows="1"></input>
-                </form>
-                <button type="submit" id="citySearchBtn" class="bg-primary text-center w-100 rounded text-light font-weight-bold">Search</button>
+        <div id="citiesEL" class="card col-4 col-md-3 vh-100 text-start">
+            <div id ="citySearch El" class="w-100">
+                    <form id ="cityForm" class="card-body">
+                        <label class="form-label" for="cityname"><h3 class="card-header font-weight-bold">Search for a City:</h3></label>
+                        <input name= "cityname" id="cityname" class="form-control font-weight-bold text-center mb-2" />
+                        <button type="submit" class="btn bg-primary text-center w-100 text-light font-weight-bold">Search</button>
+                    </form>
             </div>
             <div id="citiesSearchedContainer" class="my-4">
                 <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
             </div>
         </div>
-        <div id="weatherContainer" class="col-8 col-md-9 bg-danger vh-100">
+        <div id="weatherContainer" class="card col-8 col-md-9 bg-danger vh-100">
             <div id="currentWeather" class="mt-5 mb-3 mx-auto w-100 h-25 bg-success">
                 <!-- Weather right now for the currently searched-for city -->
             </div>
