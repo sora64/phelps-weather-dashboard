@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <div id="headerContainer" class="row">
+        <header id="header" class=" bg-primary text-center col-12">
+            <h1 id="headerText" class="my-0 p-3 h1 font-weight-bold text-white">Weather Dashboard</h1>
+        </header>
+    </div>
+    <main class="row">
+        <div id="citiesEL" class="col-4 col-md-3 vh-100 text-center">
+            <div id="citySearchEL" class="p-3 border-bottom border-dark">
+                <form class="form-group">
+                    <label for="City Search"><h3>Search for a City:</h3></label>
+                    <textarea id="citySearchInputEl" class="form-control" rows="1"></textarea>
+                </form>
+                <button id="citySearchBtn" class="bg-primary text-center rounded text-light">Search</button>
+            </div>
+            <div id="citiesSearchedContainer" class="my-4">
+                <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
+            </div>
+        </div>
+        <div id="weatherContainer" class="col-8 col-md-9 bg-danger vh-100">
+            <div id="currentWeather" class="mt-5 mb-3 mx-auto w-75 h-25 bg-success">
+                <!-- Weather right now for the currently searched-for city -->
+            </div>
+            <div id="fiveDayForecast" class="row h-25 w-75 mt-4 mx-auto bg-light">
+                <!-- Weather for the next five days for the currently searched-for city -->
+            </div>
+        </div>
+    </main>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
