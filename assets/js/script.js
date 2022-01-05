@@ -41,6 +41,16 @@ let addCity = function() {
     cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
     cityButtonEl.textContent = citySearchInputEl.value;
     mostRecentSearchContainerEL.appendChild(cityButtonEl);
+
+    let addCityCurrentWeather = function() {
+        let cityName = cityButtonEl.textContent;
+
+        getCityWeather(cityName);
+        currentWeatherCityEL.textContent = 'Currently in ' + cityName + ':';
+    }
+        
+
+    cityButtonEl.addEventListener('click', addCityCurrentWeather);
 }
 
 let getCityWeather = function(city) {
