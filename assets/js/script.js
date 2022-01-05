@@ -100,6 +100,7 @@ let getCityWeather = function(city) {
 
                             futureWeatherArray.push({'weather': data});
                             let futureConditions = futureWeatherArray.pop().weather.daily;
+                            console.log(futureConditions);
                             let tomorrowConditions = futureConditions[0];
                             let tomorrowTemperature = tomorrowConditions.temp.max;
                             console.log(tomorrowTemperature);
