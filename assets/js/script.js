@@ -2,6 +2,8 @@ const citySearchInputEl = document.querySelector('#cityname');
 const cityFormEl = document.querySelector('#cityForm');
 const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
+const currentWeatherEl = document.querySelector('#currentWeather');
+const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
 
 let citiesArray = [];
 let weatherArray = [];
@@ -13,8 +15,17 @@ let searchedCities = function() {
         cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
         cityButtonEl.textContent = JSON.parse(localStorage.key(i));
         citiesSearchedContainerEl.appendChild(cityButtonEl);
+
+        let searchedCurrentWeather = function() {
+            currentWeatherCityEL.textContent = cityButtonEl.textContent;
+            currentWeatherCityEL.classList = 'card-header font-weight-bold'
+            currentWeatherEl.appendChild(currentWeatherCityEL);
+        }
+
+        cityButtonEl.addEventListener('click', searchedCurrentWeather);
     }
 };
+
 
 searchedCities();
 
@@ -75,4 +86,12 @@ let formSubmitHandler = function(event) {
     }
 };
 
-cityFormEl.addEventListener('submit', formSubmitHandler);
+let currentWeather = function(event) {
+    event.preventDefault();
+
+    currentWeatherCityEL.textContent = citySearchInputEl.value;
+    currentWeatherCityEL.classList = 'card-header font-weight-bold'
+    currentWeatherEl.appendChild(currentWeatherCityEL);
+}
+
+cityFormEl.addEventListener('submit', formSubmitHandler && currentWeather);
