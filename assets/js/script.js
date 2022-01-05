@@ -17,15 +17,13 @@ let searchedCities = function() {
         citiesSearchedContainerEl.appendChild(cityButtonEl);
 
         let searchedCurrentWeather = function() {
-            currentWeatherCityEL.textContent = cityButtonEl.textContent;
-            currentWeatherCityEL.classList = 'card-header font-weight-bold'
+            currentWeatherCityEL.textContent = "Currently in " + cityButtonEl.textContent + ':';
             currentWeatherEl.appendChild(currentWeatherCityEL);
         }
 
         cityButtonEl.addEventListener('click', searchedCurrentWeather);
     }
 };
-
 
 searchedCities();
 
@@ -89,8 +87,7 @@ let formSubmitHandler = function(event) {
 let currentWeather = function(event) {
     event.preventDefault();
 
-    currentWeatherCityEL.textContent = citySearchInputEl.value;
-    currentWeatherCityEL.classList = 'card-header font-weight-bold'
+    currentWeatherCityEL.textContent = "Currently in " + citySearchInputEl.value + ':';
     currentWeatherEl.appendChild(currentWeatherCityEL);
 
     citySearchInputEl.value = '';
