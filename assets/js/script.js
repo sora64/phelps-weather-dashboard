@@ -80,7 +80,7 @@ let formSubmitHandler = function(event) {
     if (cityName) {
         localStorage.setItem(JSON.stringify(cityName), JSON.stringify(cityName));
         getCityWeather(cityName);
-        citySearchInputEl.value = "";
+        citySearchInputEl.value = '';
     } else {
         alert('Please enter a valid City.');
     }
@@ -92,6 +92,8 @@ let currentWeather = function(event) {
     currentWeatherCityEL.textContent = citySearchInputEl.value;
     currentWeatherCityEL.classList = 'card-header font-weight-bold'
     currentWeatherEl.appendChild(currentWeatherCityEL);
+
+    citySearchInputEl.value = '';
 }
 
 cityFormEl.addEventListener('submit', formSubmitHandler && currentWeather);
