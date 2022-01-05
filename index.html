@@ -32,12 +32,22 @@
             </div>
             
         </div>
-        <div id="weatherContainer" class=" col-8 col-md-9 bg-danger vh-100">
-            <div id="currentWeather" class="card mt-5 mb-3 mx-auto w-100 h-25 bg-success">
+        <div id="weatherContainer" class=" col-8 col-md-9">
+            <div id="currentWeather" class="card mt-5 mb-3 mx-auto w-100 h-50">
                 <!-- Weather right now for the currently searched-for city -->
                 <h4 id="currentWeatherCityEl" class="card-header font-weight-bold">City:</h4>
+                <div id="currentConditionsEl" class="card-body">
+                    <p id="currentTempEl" class="card-text h5"></p>
+                    <p id="currentWindSpeedEl" class="card-text h5"></p>
+                    <p id="currentHumidityEl" class="card-text h5"></p>
+                    <div class="d-flex flex-row">
+                        <p id="currentUVI" class="card-text h5 inline-block mr-1"></p>
+                        <p id="uvi-value" class="card-text h5 rounded text-center" width="100"></p>
+                    </div>
+                </div>
+                
             </div>
-            <div id="fiveDayForecast" class="row card h-25 w-100 mt-4 mx-auto bg-light">
+            <div id="fiveDayForecast" class="row card h-50 w-100 mt-4 mx-auto bg-light">
                 <h4 class="font-weight-bold card-header">5 Day Forecast:</h4>
                 <!-- Weather for the next five days for the currently searched-for city -->
             </div>

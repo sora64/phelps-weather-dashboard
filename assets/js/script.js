@@ -5,6 +5,11 @@ const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchCon
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
 const currentWeatherEl = document.querySelector('#currentWeather');
 const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
+const currentTemperatureEl = document.querySelector('#currentTempEl');
+const currentWindSpeedEl = document.querySelector('#currentWindSpeedEl');
+const currentHumidityEl = document.querySelector('#currentHumidityEl');
+const currentUVIEl = document.querySelector('#currentUVI');
+const currentUVIValueEL = document.querySelector('#uvi-value');
 
 let citiesArray = [];
 let weatherArray = [];
@@ -18,8 +23,10 @@ let searchedCities = function() {
         citiesSearchedContainerEl.appendChild(cityButtonEl);
 
         let searchedCurrentWeather = function() {
-            currentWeatherCityEL.textContent = "Currently in " + cityButtonEl.textContent + ':';
-            currentWeatherEl.appendChild(currentWeatherCityEL);
+            let cityName = cityButtonEl.textContent;
+
+            getCityWeather(cityName);
+            currentWeatherCityEL.textContent = 'Currently in ' + cityName + ':';
         }
 
         cityButtonEl.addEventListener('click', searchedCurrentWeather);
@@ -49,7 +56,7 @@ let getCityWeather = function(city) {
                 let cityLon = data.coord.lon;
                 citiesArray.push(data.name);                
 
-                let apiUrlTwo = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&exclude=minutely,hourly&appid=26e14b1e1bdcd3e4a900e722776adf30"
+                let apiUrlTwo = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&units=imperial&exclude=minutely,hourly&appid=26e14b1e1bdcd3e4a900e722776adf30"
 
                 // make a request to the second url
                 fetch(apiUrlTwo)
@@ -57,7 +64,16 @@ let getCityWeather = function(city) {
                     if (response.ok) {
                         response.json().then(function(data) {
                             weatherArray.push({"weather": data});
-                            console.log(weatherArray);
+                            let currentConditions = weatherArray.pop().weather.current;
+                            let currentTemperature = currentConditions.temp;
+                            let currentWindSpeed = currentConditions.wind_speed;
+                            let currentHumidity = currentConditions.humidity;
+                            let currentUVI = currentConditions.uvi;
+                            currentTemperatureEl.textContent = "Temp: " + currentTemperature + '° F';
+                            currentWindSpeedEl.textContent = "Wind Speed: " + currentWindSpeed + ' MPH';
+                            currentHumidityEl.textContent = "Humidity: " + currentHumidity + '%';
+                            currentUVIEl.textContent = "UVI: ";
+                            currentUVIValueEL.textContent = currentUVI;
                         })
                     } else {
                         alert('Error: City Not Found!');
@@ -68,7 +84,6 @@ let getCityWeather = function(city) {
             alert ('Error: City Not Found!')
         }
     })
-    addCity();
 };
 
 let formSubmitHandler = function(event) {
@@ -79,7 +94,8 @@ let formSubmitHandler = function(event) {
     if (cityName) {
         localStorage.setItem(JSON.stringify(cityName), JSON.stringify(cityName));
         getCityWeather(cityName);
-        currentWeatherCityEL.textContent = "Currently in " + citySearchInputEl.value + ':';
+        currentWeatherCityEL.textContent = 'Currently in ' + citySearchInputEl.value + ':';
+        addCity();
         citySearchInputEl.value = '';
     } else {
         alert('Please enter a valid City.');
