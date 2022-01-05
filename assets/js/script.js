@@ -5,6 +5,7 @@ const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchCon
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
 const currentWeatherEl = document.querySelector('#currentWeather');
 const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
+const currentWeatherIconEl = document.querySelector('#currentWeatherIconEl');
 const currentTemperatureEl = document.querySelector('#currentTempEl');
 const currentWindSpeedEl = document.querySelector('#currentWindSpeedEl');
 const currentHumidityEl = document.querySelector('#currentHumidityEl');
@@ -64,6 +65,7 @@ let getCityWeather = function(city) {
                     if (response.ok) {
                         response.json().then(function(data) {
                             weatherArray.push({"weather": data});
+                            // console.log(weatherArray.pop().weather.current.weather[0].icon)
                             let currentConditions = weatherArray.pop().weather.current;
                             let currentTemperature = currentConditions.temp;
                             let currentWindSpeed = currentConditions.wind_speed;
@@ -74,6 +76,10 @@ let getCityWeather = function(city) {
                             currentHumidityEl.textContent = "Humidity: " + currentHumidity + '%';
                             currentUVIEl.textContent = "UVI: ";
                             currentUVIValueEL.textContent = currentUVI;
+
+                            let currentWeatherIcon = currentConditions.weather[0].icon;
+                            currentWeatherIconEl.src="http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
+                            currentWeatherIconEl.classList.remove('d-none');
                         })
                     } else {
                         alert('Error: City Not Found!');
