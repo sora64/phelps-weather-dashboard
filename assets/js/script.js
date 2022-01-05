@@ -1,5 +1,6 @@
 const citySearchInputEl = document.querySelector('#cityname');
 const cityFormEl = document.querySelector('#cityForm');
+const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
 
 let citiesArray = [];
@@ -9,13 +10,20 @@ let searchedCities = function() {
     for (let i = 0; i < localStorage.length; i++) {
         console.log(localStorage.key(i));
         let cityButtonEl = document.createElement('button');
-        cityButtonEl.classList = 'btn text-white font-weight-bold bg-dark';
+        cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
         cityButtonEl.textContent = JSON.parse(localStorage.key(i));
         citiesSearchedContainerEl.appendChild(cityButtonEl);
     }
 };
 
 searchedCities();
+
+let addCity = function() {
+    let cityButtonEl = document.createElement('button');
+    cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
+    cityButtonEl.textContent = citySearchInputEl.value;
+    mostRecentSearchContainerEL.appendChild(cityButtonEl);
+}
 
 let getCityWeather = function(city) {
     // formate the OpenWeather api url
@@ -50,10 +58,7 @@ let getCityWeather = function(city) {
             alert ('Error: City Not Found!')
         }
     })
-    .catch(function(error) {
-        alert('Unable to connect to OpenWeather.')
-    });
-    searchedCities();
+    addCity();
 };
 
 let formSubmitHandler = function(event) {

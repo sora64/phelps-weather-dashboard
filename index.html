@@ -14,19 +14,25 @@
         </header>
     </div>
     <main class="row">
-        <div id="citiesEL" class="card col-4 col-md-3 vh-100 text-start">
-            <div id ="citySearch El" class="w-100">
+        <div id="citiesEL" class="col-4 col-md-3 vh-100 my-4 text-start">
+            <div id ="citySearch El" class="w-100 border-bottom border-dark">
                     <form id ="cityForm" class="card-body">
                         <label class="form-label" for="cityname"><h3 class="card-header font-weight-bold">Search for a City:</h3></label>
                         <input name= "cityname" id="cityname" class="form-control font-weight-bold text-center mb-2" placeholder="San Diego"/>
                         <button type="submit" class="btn bg-primary text-center w-100 text-light font-weight-bold">Search</button>
                     </form>
             </div>
-            <div id="citiesSearchedContainer" class="card my-4">
-                <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
+            <div class="card m-4">
+                <div id="mostRecentSearchContainer">
+                    <!-- Container for the city just searched -->                
+                </div>
+                <div id="citiesSearchedContainer">
+                    <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
+                </div>
             </div>
+            
         </div>
-        <div id="weatherContainer" class="card col-8 col-md-9 bg-danger vh-100">
+        <div id="weatherContainer" class=" col-8 col-md-9 bg-danger vh-100">
             <div id="currentWeather" class="card mt-5 mb-3 mx-auto w-100 h-25 bg-success">
                 <!-- Weather right now for the currently searched-for city -->
             </div>
