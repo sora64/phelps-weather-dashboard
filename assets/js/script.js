@@ -75,7 +75,7 @@ let getCityWeather = function(city) {
                     if (response.ok) {
                         response.json().then(function(data) {
                             weatherArray.push({"weather": data});
-                            // console.log(weatherArray.pop().weather.current.weather[0].icon)
+                            // console.log(weatherArray.pop().weather.current)
                             let currentConditions = weatherArray.pop().weather.current;
                             let currentTemperature = currentConditions.temp;
                             let currentWindSpeed = currentConditions.wind_speed;
@@ -86,6 +86,13 @@ let getCityWeather = function(city) {
                             currentHumidityEl.textContent = "Humidity: " + currentHumidity + '%';
                             currentUVIEl.textContent = "UVI: ";
                             currentUVIValueEL.textContent = currentUVI;
+                            if (currentUVI <= 2) {
+                                currentUVIValueEL.classList.add('bg-success');
+                            } else if (currentUVI >= 3 && currentUVI <=7) {
+                                currentUVIValueEL.classList.add('bg-warning')
+                            } else if (currentUVI > 7) {
+                                currentUVIValueEL.classList.add('bg-danger')
+                            };
 
                             let currentWeatherIcon = currentConditions.weather[0].icon;
                             currentWeatherIconEl.src="http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
