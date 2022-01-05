@@ -14,6 +14,7 @@ const currentUVIValueEL = document.querySelector('#uvi-value');
 
 let citiesArray = [];
 let weatherArray = [];
+let futureWeatherArray = [];
 
 let searchedCities = function() {
     for (let i = 0; i < localStorage.length; i++) {
@@ -74,17 +75,17 @@ let getCityWeather = function(city) {
                 .then(function(response) {
                     if (response.ok) {
                         response.json().then(function(data) {
-                            weatherArray.push({"weather": data});
+                            weatherArray.push({'weather': data});
                             // console.log(weatherArray.pop().weather.current)
                             let currentConditions = weatherArray.pop().weather.current;
                             let currentTemperature = currentConditions.temp;
                             let currentWindSpeed = currentConditions.wind_speed;
                             let currentHumidity = currentConditions.humidity;
                             let currentUVI = currentConditions.uvi;
-                            currentTemperatureEl.textContent = "Temp: " + currentTemperature + '° F';
-                            currentWindSpeedEl.textContent = "Wind Speed: " + currentWindSpeed + ' MPH';
-                            currentHumidityEl.textContent = "Humidity: " + currentHumidity + '%';
-                            currentUVIEl.textContent = "UVI: ";
+                            currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
+                            currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
+                            currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
+                            currentUVIEl.textContent = 'UVI: ';
                             currentUVIValueEL.textContent = currentUVI;
                             if (currentUVI <= 2) {
                                 currentUVIValueEL.classList.add('bg-success');
@@ -93,10 +94,21 @@ let getCityWeather = function(city) {
                             } else if (currentUVI > 7) {
                                 currentUVIValueEL.classList.add('bg-danger')
                             };
-
                             let currentWeatherIcon = currentConditions.weather[0].icon;
                             currentWeatherIconEl.src="http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
                             currentWeatherIconEl.classList.remove('d-none');
+
+                            futureWeatherArray.push({'weather': data});
+                            let futureConditions = futureWeatherArray.pop().weather.daily;
+                            let tomorrowConditions = futureConditions[0];
+                            let tomorrowTemperature = tomorrowConditions.temp.max;
+                            console.log(tomorrowTemperature);
+                            let tomorrowWindSpeed = tomorrowConditions.wind_speed;
+                            console.log(tomorrowWindSpeed);
+                            let tomorrowHumidity = tomorrowConditions.humidity;
+                            console.log(tomorrowHumidity);
+                            let tomorrowUVI = tomorrowConditions.uvi;
+                            console.log(tomorrowUVI);
                         })
                     } else {
                         alert('Error: City Not Found!');
