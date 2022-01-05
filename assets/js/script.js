@@ -1,3 +1,4 @@
+const searchContainerEl = document.querySelector('#searchContainer');
 const citySearchInputEl = document.querySelector('#cityname');
 const cityFormEl = document.querySelector('#cityForm');
 const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
@@ -78,19 +79,11 @@ let formSubmitHandler = function(event) {
     if (cityName) {
         localStorage.setItem(JSON.stringify(cityName), JSON.stringify(cityName));
         getCityWeather(cityName);
+        currentWeatherCityEL.textContent = "Currently in " + citySearchInputEl.value + ':';
         citySearchInputEl.value = '';
     } else {
         alert('Please enter a valid City.');
     }
 };
 
-let currentWeather = function(event) {
-    event.preventDefault();
-
-    currentWeatherCityEL.textContent = "Currently in " + citySearchInputEl.value + ':';
-    currentWeatherEl.appendChild(currentWeatherCityEL);
-
-    citySearchInputEl.value = '';
-}
-
-cityFormEl.addEventListener('submit', formSubmitHandler && currentWeather);
+cityFormEl.addEventListener('submit', formSubmitHandler); 
