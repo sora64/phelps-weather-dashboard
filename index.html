@@ -14,26 +14,25 @@
         </header>
     </div>
     <main class="row bg-light">
-        <div id="citiesEL" class="col-4 col-md-3 vh-100 my-4 text-start">
-            <div id ="citySearch El" class="w-100 border-bottom border-dark">
+        <div id="citiesEL" class="col-4 col-md-3 vh-100 my-4">
+            <div id ="citySearch El" class="card border border-dark m-4">
                     <form id ="cityForm" class="card-body">
-                        <label class="form-label" for="cityname"><h3 class="card-text bg-light font-weight-bold">Search for a City:</h3></label>
+                        <label class="form-label" for="cityname"><h3 class="card-text font-weight-bold">Search for a City:</h3></label>
                         <input name= "cityname" id="cityname" class="form-control font-weight-bold text-center mb-2" placeholder="San Diego"/>
                         <button type="submit" class="btn bg-info text-center w-100 text-light font-weight-bold">Search</button>
                     </form>
             </div>
-            <div id="searchContainer" class="card m-4">
+            <div id="searchContainer" class="card border border-dark text-center m-4">
                 <div id="mostRecentSearchContainer">
                     <!-- Container for the city just searched -->                
                 </div>
-                <div id="citiesSearchedContainer">
+                <div id="citiesSearchedContainer" class="text-center">
                     <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
                 </div>
-            </div>
-            
+            </div>   
         </div>
         <div id="weatherContainer" class=" col-8 col-md-9">
-            <div id="currentWeather" class="card mt-5 mb-3 mx-auto w-100 h-50">
+            <div id="currentWeather" class="border border-dark card mt-5 mb-3 mr-5 h-50">
                 <!-- Weather right now for the currently searched-for city -->
                 <div id="currentWeatherHeaderEL" class="inline-block bg-dark card-header d-flex flex-row">
                     <h4 id="currentWeatherCityEl" class="card-text font-weight-bold text-white">City:</h4>
@@ -49,7 +48,7 @@
                     </div>
                 </div>  
             </div>
-            <div id="fiveDayForecast" class="row bg-secondary card h-50 w-100 mt-4 mx-auto">
+            <div id="fiveDayForecast" class="row bg-secondary border border-dark card h-50 w-100 mt-4 mr-4">
                 <h4 class="font-weight-bold card-header bg-dark text-white justify-content-center">5 Day Forecast:</h4>
                 <!-- Weather for the next five days for the currently searched-for city -->
                 <div class="row card-body bg-light m-2 justify-content-around h-75">

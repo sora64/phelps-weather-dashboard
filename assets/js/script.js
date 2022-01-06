@@ -26,7 +26,7 @@ let futureWeatherArray = [];
 let searchedCities = function() {
     for (let i = 0; i < localStorage.length; i++) {
         let cityButtonEl = document.createElement('button');
-        cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
+        cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
         cityButtonEl.textContent = JSON.parse(localStorage.key(i));
         citiesSearchedContainerEl.appendChild(cityButtonEl);
 
@@ -45,7 +45,7 @@ searchedCities();
 
 let addCity = function() {
     let cityButtonEl = document.createElement('button');
-    cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
+    cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
     cityButtonEl.textContent = citySearchInputEl.value;
     mostRecentSearchContainerEL.appendChild(cityButtonEl);
 
