@@ -9,17 +9,17 @@
 </head>
 <body>
     <div id="headerContainer" class="row">
-        <header id="header" class="bg-primary text-center col-12">
+        <header id="header" class="bg-info text-center col-12">
             <h1 id="headerText" class="my-0 p-3 h1 font-weight-bold text-white">Weather Dashboard</h1>
         </header>
     </div>
-    <main class="row">
+    <main class="row bg-light">
         <div id="citiesEL" class="col-4 col-md-3 vh-100 my-4 text-start">
             <div id ="citySearch El" class="w-100 border-bottom border-dark">
                     <form id ="cityForm" class="card-body">
-                        <label class="form-label" for="cityname"><h3 class="card-header font-weight-bold">Search for a City:</h3></label>
+                        <label class="form-label" for="cityname"><h3 class="card-text bg-light font-weight-bold">Search for a City:</h3></label>
                         <input name= "cityname" id="cityname" class="form-control font-weight-bold text-center mb-2" placeholder="San Diego"/>
-                        <button type="submit" class="btn bg-primary text-center w-100 text-light font-weight-bold">Search</button>
+                        <button type="submit" class="btn bg-info text-center w-100 text-light font-weight-bold">Search</button>
                     </form>
             </div>
             <div id="searchContainer" class="card m-4">
@@ -35,24 +35,40 @@
         <div id="weatherContainer" class=" col-8 col-md-9">
             <div id="currentWeather" class="card mt-5 mb-3 mx-auto w-100 h-50">
                 <!-- Weather right now for the currently searched-for city -->
-                <div id="currentWeatherHeaderEL" class="bg-dark card-header d-flex flex-row">
-                    <h4 id="currentWeatherCityEl" class="font-weight-bold text-white">City:</h4>
-                    <img id="currentWeatherIconEl" class="d-none ml-3" height="50" width="50" />
+                <div id="currentWeatherHeaderEL" class="inline-block bg-dark card-header d-flex flex-row">
+                    <h4 id="currentWeatherCityEl" class="card-text font-weight-bold text-white">City:</h4>
+                    <img id="currentWeatherIconEl" class="d-none ml-1 mt-0" height="35" width="35" />
                 </div>
-                <div id="currentConditionsEl" class="card-body">
+                <div id="currentConditionsEl" class="card-body bg-light">
                     <p id="currentTempEl" class="card-text h4"></p>
                     <p id="currentWindSpeedEl" class="card-text h4"></p>
                     <p id="currentHumidityEl" class="card-text h4"></p>
-                    <div class="d-flex flex-row">
-                        <p id="currentUVI" class="card-text h4 inline-block mr-1"></p>
-                        <p id="uvi-value" class="card-text h4 rounded px-1 text-center" width="100"></p>
+                    <div class="card-text inline-block h4 d-flex flex-row">
+                        <p id="currentUVI" class="h4 mr-1"></p>
+                        <p id="uvi-value" class="h4 rounded px-1 text-center" width="100"></p>
+                    </div>
+                </div>  
+            </div>
+            <div id="fiveDayForecast" class="row bg-secondary card h-50 w-100 mt-4 mx-auto">
+                <h4 class="font-weight-bold card-header bg-dark text-white justify-content-center">5 Day Forecast:</h4>
+                <!-- Weather for the next five days for the currently searched-for city -->
+                <div class="row card-body bg-light m-2 justify-content-around h-75">
+                    <div id="tomorrowEl" class="col-2 bg-info card h4 mt-4">
+                        <h3>Hello</h3>
+                    </div>
+                    <div id="theNextDayEl" class="col-2 bg-info card h4 mt-4">
+                        <h3>Hello</h3>
+                    </div>
+                    <div id="theNextNextDayEl" class="col-2 bg-info card h4 mt-4">
+                        <h3>Hello</h3>
+                    </div>
+                    <div id="theNextNextNextDayEl" class="col-2 bg-info card h4 mt-4">
+                        <h3>Hello</h3>
+                    </div>
+                    <div id="theFinalDayEl"class="col-2 bg-info card h4 mt-4">
+                        <h3>Hello</h3>
                     </div>
                 </div>
-                
-            </div>
-            <div id="fiveDayForecast" class="row card h-50 w-100 mt-4 mx-auto bg-light">
-                <h4 class="font-weight-bold card-header bg-primary text-white">5 Day Forecast:</h4>
-                <!-- Weather for the next five days for the currently searched-for city -->
             </div>
         </div>
     </main>

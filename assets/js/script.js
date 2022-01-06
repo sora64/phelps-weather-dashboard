@@ -11,6 +11,13 @@ const currentWindSpeedEl = document.querySelector('#currentWindSpeedEl');
 const currentHumidityEl = document.querySelector('#currentHumidityEl');
 const currentUVIEl = document.querySelector('#currentUVI');
 const currentUVIValueEL = document.querySelector('#uvi-value');
+const tomorrowEl = document.querySelector('#tomorrowEl');
+const theNextDayEl = document.querySelector('#theNextDayEl');
+const theNextNextDayEl = document.querySelector('#theNextNextDayEl');
+const theNextNextNextDayEl = document.querySelector('#theNextNextNextDayEl');
+const theFinalDayEl = document.querySelector('#theFinalDayEl');
+
+
 
 let citiesArray = [];
 let weatherArray = [];
@@ -18,7 +25,6 @@ let futureWeatherArray = [];
 
 let searchedCities = function() {
     for (let i = 0; i < localStorage.length; i++) {
-        console.log(localStorage.key(i));
         let cityButtonEl = document.createElement('button');
         cityButtonEl.classList = 'btn m-1 w-100 text-white font-weight-bold bg-dark';
         cityButtonEl.textContent = JSON.parse(localStorage.key(i));
@@ -75,41 +81,10 @@ let getCityWeather = function(city) {
                 .then(function(response) {
                     if (response.ok) {
                         response.json().then(function(data) {
-                            weatherArray.push({'weather': data});
-                            // console.log(weatherArray.pop().weather.current)
-                            let currentConditions = weatherArray.pop().weather.current;
-                            let currentTemperature = currentConditions.temp;
-                            let currentWindSpeed = currentConditions.wind_speed;
-                            let currentHumidity = currentConditions.humidity;
-                            let currentUVI = currentConditions.uvi;
-                            currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
-                            currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
-                            currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
-                            currentUVIEl.textContent = 'UVI: ';
-                            currentUVIValueEL.textContent = currentUVI;
-                            if (currentUVI <= 2) {
-                                currentUVIValueEL.classList.add('bg-success');
-                            } else if (currentUVI >= 3 && currentUVI <=7) {
-                                currentUVIValueEL.classList.add('bg-warning')
-                            } else if (currentUVI > 7) {
-                                currentUVIValueEL.classList.add('bg-danger')
-                            };
-                            let currentWeatherIcon = currentConditions.weather[0].icon;
-                            currentWeatherIconEl.src="http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
-                            currentWeatherIconEl.classList.remove('d-none');
+                            displayCurrentWeather(data);
 
-                            futureWeatherArray.push({'weather': data});
-                            let futureConditions = futureWeatherArray.pop().weather.daily;
-                            console.log(futureConditions);
-                            let tomorrowConditions = futureConditions[0];
-                            let tomorrowTemperature = tomorrowConditions.temp.max;
-                            console.log(tomorrowTemperature);
-                            let tomorrowWindSpeed = tomorrowConditions.wind_speed;
-                            console.log(tomorrowWindSpeed);
-                            let tomorrowHumidity = tomorrowConditions.humidity;
-                            console.log(tomorrowHumidity);
-                            let tomorrowUVI = tomorrowConditions.uvi;
-                            console.log(tomorrowUVI);
+                            displayForecast(data);
+                            
                         })
                     } else {
                         alert('Error: City Not Found!');
@@ -139,3 +114,62 @@ let formSubmitHandler = function(event) {
 };
 
 cityFormEl.addEventListener('submit', formSubmitHandler); 
+
+function displayCurrentWeather(data) {
+    weatherArray.push({ 'weather': data });
+    let currentConditions = weatherArray.pop().weather.current;
+    let currentTemperature = currentConditions.temp;
+    let currentWindSpeed = currentConditions.wind_speed;
+    let currentHumidity = currentConditions.humidity;
+    let currentUVI = currentConditions.uvi;
+    currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
+    currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
+    currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
+    currentUVIEl.textContent = 'UVI: ';
+    currentUVIValueEL.textContent = currentUVI;
+    if (currentUVI <= 2) {
+        currentUVIValueEL.classList.remove('bg-warning');
+        currentUVIValueEL.classList.remove('bg-danger');
+        currentUVIValueEL.classList.add('bg-success');
+    } else if (currentUVI >= 3 && currentUVI <= 7) {
+        currentUVIValueEL.classList.remove('bg-danger');
+        currentUVIValueEL.classList.remove('bg-success');
+        currentUVIValueEL.classList.add('bg-warning');
+    } else if (currentUVI > 7) {
+        currentUVIValueEL.classList.remove('bg-warning');
+        currentUVIValueEL.classList.remove('bg-success');
+        currentUVIValueEL.classList.add('bg-danger');
+    };
+    let currentWeatherIcon = currentConditions.weather[0].icon;
+    currentWeatherIconEl.src = "http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
+    currentWeatherIconEl.classList.remove('d-none');
+}
+
+function displayForecast(data) {
+    futureWeatherArray.push({ 'weather': data });
+    let futureConditions = futureWeatherArray.pop().weather.daily;
+    forecastedTemperatures(futureConditions);
+}
+
+function forecastedTemperatures(futureConditions) {
+    let tommorrowTemp = futureConditions[0].temp.day;
+    let tomorrowTempValue = document.createElement('p');
+    tomorrowTempValue.textContent = "Temp: " + tommorrowTemp;
+    tomorrowEl.appendChild(tomorrowTempValue);
+    let theNextDayTemp = futureConditions[1].temp.day;
+    let theNextDayTempValue = document.createElement('p');
+    theNextDayTempValue.textContent = "Temp: " + theNextDayTemp;
+    theNextDayEl.appendChild(theNextDayTempValue);    
+    let theNextNextDayTemp = futureConditions[2].temp.day;
+    let theNextNextDayTempValue = document.createElement('p');
+    theNextNextDayTempValue.textContent = "Temp: " + theNextNextDayTemp;
+    theNextNextDayEl.appendChild(theNextNextDayTempValue);     
+    let theNextNextNextDayTemp = futureConditions[3].temp.day;
+    let theNextNextNextDayTempValue = document.createElement('p');
+    theNextNextNextDayTempValue.textContent = "Temp: " + theNextNextNextDayTemp;
+    theNextNextNextDayEl.appendChild(theNextNextNextDayTempValue);     
+    let theFinalDayTemp = futureConditions[4].temp.day;
+    let theFinalDayTempValue = document.createElement('p');
+    theFinalDayTempValue.textContent = "Temp: " + theFinalDayTemp;
+    theFinalDayEl.appendChild(theFinalDayTempValue);
+}
