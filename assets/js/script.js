@@ -1,40 +1,15 @@
 const searchContainerEl = document.querySelector('#searchContainer');
 const citySearchInputEl = document.querySelector('#cityname');
+const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
 const cityFormEl = document.querySelector('#cityForm');
 const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
-
-// current weather element variables
-const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
-const currentWeatherIconEl = document.querySelector('#currentWeatherIconEl');
-const currentTemperatureEl = document.querySelector('#currentTempEl');
-const currentWindSpeedEl = document.querySelector('#currentWindSpeedEl');
-const currentHumidityEl = document.querySelector('#currentHumidityEl');
-const currentUVIEl = document.querySelector('#currentUVI');
-const currentUVIValueEL = document.querySelector('#uvi-value');
-
-// tomorrow's weather element variables
-const tomorrowEl = document.querySelector('#tomorrowEl');
-
-// the day after tomorrow's variables
-const theNextDayEl = document.querySelector('#theNextDayEl');
-
-// the day after the day after tomorrow's variables
-const theNextNextDayEl = document.querySelector('#theNextNextDayEl');
-
-// the day after the day after the day after tomorrow's variables
-const theNextNextNextDayEl = document.querySelector('#theNextNextNextDayEl');
-
-// the last forecasted day's variables
-const theFinalDayEl = document.querySelector('#theFinalDayEl');
-
-
 
 let citiesArray = [];
 let weatherArray = [];
 let futureWeatherArray = [];
 
-let searchedCities = function() {
+function searchedCities() {
     for (let i = 0; i < localStorage.length; i++) {
         let cityButtonEl = document.createElement('button');
         cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
@@ -54,7 +29,7 @@ let searchedCities = function() {
 
 searchedCities();
 
-let addCity = function() {
+function addCity() {
     let cityButtonEl = document.createElement('button');
     cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
     cityButtonEl.textContent = citySearchInputEl.value;
@@ -71,7 +46,7 @@ let addCity = function() {
     cityButtonEl.addEventListener('click', addCityCurrentWeather);
 }
 
-let getCityWeather = function(city) {
+function getCityWeather(city) {
     // formate the OpenWeather api url
     let apiUrlOne = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=26e14b1e1bdcd3e4a900e722776adf30";
 
@@ -107,7 +82,7 @@ let getCityWeather = function(city) {
     })
 }
 
-let formSubmitHandler = function(event) {
+function formSubmitHandler(event) {
     event.preventDefault();
 
     let cityName = citySearchInputEl.value.trim();
@@ -124,6 +99,14 @@ let formSubmitHandler = function(event) {
 }
 
 function displayCurrentWeather(data) {
+    // current weather element variables
+    const currentWeatherIconEl = document.querySelector('#currentWeatherIconEl');
+    const currentTemperatureEl = document.querySelector('#currentTempEl');
+    const currentWindSpeedEl = document.querySelector('#currentWindSpeedEl');
+    const currentHumidityEl = document.querySelector('#currentHumidityEl');
+    const currentUVIEl = document.querySelector('#currentUVI');
+    const currentUVIValueEL = document.querySelector('#uvi-value');
+
     weatherArray.push({ 'weather': data });
     let currentConditions = weatherArray.pop().weather.current;
     let currentTemperature = currentConditions.temp;
@@ -160,71 +143,92 @@ function displayForecast(data) {
     forecastedWindSpeeds(futureConditions);
     forecastedHumidity(futureConditions);
     forecastedUVI(futureConditions);
+    forecastedIcons(futureConditions);
 }
 
 function forecastedTemperatures(futureConditions) {
+
     let tommorrowTemp = futureConditions[0].temp.day;
     const tomorrowTempValue = document.getElementById('tomorrowTempEl');
     tomorrowTempValue.textContent = 'Temp: ' + tommorrowTemp + '° F';
+
     let theNextDayTemp = futureConditions[1].temp.day;
     const theNextDayTempValue = document.getElementById('theNextDayTempEl');
     theNextDayTempValue.textContent = 'Temp: ' + theNextDayTemp + '° F';
+
     let theNextNextDayTemp = futureConditions[2].temp.day;
     const theNextNextDayTempValue = document.getElementById('theNextNextDayTempEl');
     theNextNextDayTempValue.textContent = 'Temp: ' + theNextNextDayTemp + '° F';
+
     let theNextNextNextDayTemp = futureConditions[3].temp.day;
     const theNextNextNextDayTempValue = document.getElementById('theNextNextNextDayTempEl');
     theNextNextNextDayTempValue.textContent = 'Temp: ' + theNextNextNextDayTemp + '° F';
+
     let theFinalDayTemp = futureConditions[4].temp.day;
     const theFinalDayTempValue = document.getElementById('theFinalDayTempEl');
     theFinalDayTempValue.textContent = 'Temp: ' + theFinalDayTemp + '° F';
 }
 
 function forecastedWindSpeeds(futureConditions) {
+
     let tommorrowWindSpeed = futureConditions[0].wind_speed;
     const tomorrowWindSpeedValue = document.getElementById('tomorrowWindSpeedEl');
     tomorrowWindSpeedValue.textContent = 'Wind Speed: ' + tommorrowWindSpeed + ' MPH';
+
     let theNextDayWindSpeed = futureConditions[1].wind_speed;
     const theNextDayWindSpeedValue = document.getElementById('theNextDayWindSpeedEl');
     theNextDayWindSpeedValue.textContent = 'Wind Speed: ' + theNextDayWindSpeed+ ' MPH';
+
     let theNextNextDayWindSpeed = futureConditions[2].wind_speed;
     const theNextNextDayWindSpeedValue = document.getElementById('theNextNextDayWindSpeedEl');
     theNextNextDayWindSpeedValue.textContent = 'Wind Speed: ' + theNextNextDayWindSpeed+ ' MPH';
+
     let theNextNextNextDayWindSpeed = futureConditions[3].wind_speed;
     const theNextNextNextDayWindSpeedValue = document.getElementById('theNextNextNextDayWindSpeedEl');
     theNextNextNextDayWindSpeedValue.textContent = 'Wind Speed: ' + theNextNextNextDayWindSpeed+ ' MPH';
+
     let theFinalDayWindSpeed = futureConditions[4].wind_speed;
     const theFinalDayWindSpeedValue = document.getElementById('theFinalDayWindSpeedEl');
     theFinalDayWindSpeedValue.textContent = 'Wind Speed: ' + theFinalDayWindSpeed+ ' MPH';
 }
 
 function forecastedHumidity(futureConditions) {
+
     let tomorrowHumidity = futureConditions[0].humidity;
     const tomorrowHumidityValue = document.getElementById('tomorrowHumidityEl');
     tomorrowHumidityValue.textContent = 'Humidity: ' + tomorrowHumidity + '%';
+
     let theNextDayHumidity = futureConditions[1].humidity;
     const theNextDayHumidityValue = document.getElementById('theNextDayHumidityEl');
     theNextDayHumidityValue.textContent = 'Humidity: ' + theNextDayHumidity + '%';
+
     let theNextNextDayHumidity = futureConditions[2].humidity;
     const theNextNextDayHumidityValue = document.getElementById('theNextNextDayHumidityEl');
     theNextNextDayHumidityValue.textContent = 'Humidity: ' + theNextNextDayHumidity + '%';
+
     let theNextNextNextDayHumidity = futureConditions[3].humidity;
     const theNextNextNextDayHumidityValue = document.getElementById('theNextNextNextDayHumidityEl');
     theNextNextNextDayHumidityValue.textContent = 'Humidity: ' + theNextNextNextDayHumidity + '%';
+
     let theFinalDayHumidity = futureConditions[4].humidity;
     const theFinalDayHumidityValue = document.getElementById('theFinalDayHumidityEl');
     theFinalDayHumidityValue.textContent = 'Humidity: ' + theFinalDayHumidity + '%';
 }
 
 function forecastedUVI(futureConditions) {
+
     const uviTomorrowText = document.getElementById('tomorrowUVI');
     uviTomorrowText.textContent = 'UVI: ';
+
     const uviTheNextDayText = document.getElementById('theNextDayUVI');
     uviTheNextDayText.textContent = 'UVI: ';
+
     const uviTheNextNextDayText = document.getElementById('theNextNextDayUVI');
     uviTheNextNextDayText.textContent = 'UVI: ';
+
     const uviTheNextNextNextDayText = document.getElementById('theNextNextNextDayUVI');
     uviTheNextNextNextDayText.textContent = 'UVI: ';
+
     const uviTheFinalDayText = document.getElementById('theFinalDayUVI');
     uviTheFinalDayText.textContent = 'UVI: ';
 
@@ -328,6 +332,34 @@ function forecastedUVI(futureConditions) {
             theFinalDayUVIValueEl.classList.add('bg-danger');
         };
     }
+}
+
+function forecastedIcons(futureConditions) {
+
+    const tomorrowWeatherIconEl = document.getElementById('tomorrowWeatherIconEl');
+    let tomorrowWeatherIcon = futureConditions[0].weather[0].icon;
+    tomorrowWeatherIconEl.src = "http://openweathermap.org/img/wn/" + tomorrowWeatherIcon + "@2x.png";
+    tomorrowWeatherIconEl.classList.remove('d-none');
+
+    const theNextDayWeatherIconEl = document.getElementById('theNextDayWeatherIconEl');
+    let theNextDayWeatherIcon = futureConditions[1].weather[0].icon;
+    theNextDayWeatherIconEl.src = "http://openweathermap.org/img/wn/" + theNextDayWeatherIcon + "@2x.png";
+    theNextDayWeatherIconEl.classList.remove('d-none');
+
+    const theNextNextDayWeatherIconEl = document.getElementById('theNextNextDayWeatherIconEl');
+    let theNextNextDayWeatherIcon = futureConditions[2].weather[0].icon;
+    theNextNextDayWeatherIconEl.src = "http://openweathermap.org/img/wn/" + theNextNextDayWeatherIcon + "@2x.png";
+    theNextNextDayWeatherIconEl.classList.remove('d-none');
+
+    const theNextNextNextDayWeatherIconEl = document.getElementById('theNextNextNextDayWeatherIconEl');
+    let theNextNextNextDayWeatherIcon = futureConditions[3].weather[0].icon;
+    theNextNextNextDayWeatherIconEl.src = "http://openweathermap.org/img/wn/" + theNextNextNextDayWeatherIcon + "@2x.png";
+    theNextNextNextDayWeatherIconEl.classList.remove('d-none');
+
+    const theFinalDayWeatherIconEl = document.getElementById('theFinalDayWeatherIconEl');
+    let theFinalDayWeatherIcon = futureConditions[4].weather[0].icon;
+    theFinalDayWeatherIconEl.src = "http://openweathermap.org/img/wn/" + theFinalDayWeatherIcon + "@2x.png";
+    theFinalDayWeatherIconEl.classList.remove('d-none');
 }
 
 cityFormEl.addEventListener('submit', formSubmitHandler);   
