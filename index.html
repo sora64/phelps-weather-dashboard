@@ -14,7 +14,7 @@
         </header>
     </div>
     <main class="row bg-light">
-        <div id="citiesEL" class="col-4 col-md-3 vh-100 my-4">
+        <div id="citiesEL" class="col-12 col-md-3 vh-100 my-4">
             <div id ="citySearch El" class="card border border-dark m-4">
                     <form id ="cityForm" class="card-body">
                         <label class="form-label" for="cityname"><h3 class="card-text font-weight-bold">Search for a City:</h3></label>
@@ -31,41 +31,101 @@
                 </div>
             </div>   
         </div>
-        <div id="weatherContainer" class=" col-8 col-md-9">
+        <div id="weatherContainer" class=" col-12 col-md-9">
             <div id="currentWeather" class="border border-dark card mt-5 mb-3 mr-5 h-50">
                 <!-- Weather right now for the currently searched-for city -->
                 <div id="currentWeatherHeaderEL" class="inline-block bg-dark card-header d-flex flex-row">
                     <h4 id="currentWeatherCityEl" class="card-text font-weight-bold text-white">City:</h4>
                     <img id="currentWeatherIconEl" class="d-none ml-1 mt-0" height="35" width="35" />
                 </div>
-                <div id="currentConditionsEl" class="card-body bg-light">
-                    <p id="currentTempEl" class="card-text h4"></p>
-                    <p id="currentWindSpeedEl" class="card-text h4"></p>
-                    <p id="currentHumidityEl" class="card-text h4"></p>
-                    <div class="card-text inline-block h4 d-flex flex-row">
-                        <p id="currentUVI" class="h4 mr-1"></p>
-                        <p id="uvi-value" class="h4 rounded px-1 text-center" width="100"></p>
+                <div id="currentConditionsEl" class="h4 card-body bg-light">
+                    <p id="currentTempEl" class="card-text"></p>
+                    <p id="currentWindSpeedEl" class="card-text"></p>
+                    <p id="currentHumidityEl" class="card-text"></p>
+                    <div class="card-text inline-block d-flex flex-row">
+                        <p id="currentUVI" class="mr-1"></p>
+                        <p id="uvi-value" class="rounded card text-white border border-dark px-1 text-center" width="100"></p>
                     </div>
                 </div>  
             </div>
             <div id="fiveDayForecast" class="row bg-secondary border border-dark card h-50 w-100 mt-4 mr-4">
                 <h4 class="font-weight-bold card-header bg-dark text-white justify-content-center">5 Day Forecast:</h4>
                 <!-- Weather for the next five days for the currently searched-for city -->
-                <div class="row card-body bg-light m-2 justify-content-around h-75">
-                    <div id="tomorrowEl" class="col-2 bg-info card h4 mt-4">
-                        <h3>Hello</h3>
+                <div class="row card-body bg-light m-2 justify-content-around h-50">
+                    <div id="tomorrowEl" class="col-12 col-md-2 bg-info card mt-1">
+                        <div id="tomorrowWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
+                            <h5 id="tomorrowDateEl" class="card-text font-weight-bold text-white">Day 2</h5>
+                            <img id="tomorrowWeatherIconEl" class="d-none ml-1 mt-0" height="25" width="25" />
+                        </div>
+                        <div id="tomorrowConditiondsEl" class="h6 text-white">
+                            <p id="tomorrowTempEl" class="card-text "></p>
+                            <p id="tomorrowWindSpeedEl" class="card-text"></p>
+                            <p id="tomorrowHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="tomorrowUVI" class="mr-1"></p>
+                                <p id="uvi-value-two" class="card text-white rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
                     </div>
-                    <div id="theNextDayEl" class="col-2 bg-info card h4 mt-4">
-                        <h3>Hello</h3>
+                    <div id="theNextDayEl" class="col-12 col-md-2 bg-info card mt-1">
+                        <div id="theNextDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
+                            <h5 id="theNextDateEl" class="card-text font-weight-bold text-white">Day 3</h5>
+                            <img id="theNextDayWeatherIconEl" class="d-none ml-1 mt-0" height="25" width="25" />
+                        </div>
+                        <div id="theNextDayConditiondsEl" class="h6 text-white">
+                            <p id="theNextDayTempEl" class="card-text "></p>
+                            <p id="theNextDayWindSpeedEl" class="card-text"></p>
+                            <p id="theNextDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theNextDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-three" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
                     </div>
-                    <div id="theNextNextDayEl" class="col-2 bg-info card h4 mt-4">
-                        <h3>Hello</h3>
+                    <div id="theNextNextDayEl" class="col-12 col-md-2 bg-info card mt-1">
+                        <div id="theNextNextDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
+                            <h5 id="theNextNextDateEl" class="card-text font-weight-bold text-white">Day 4</h5>
+                            <img id="theNextNextDayWeatherIconEl" class="d-none ml-1 mt-0" height="25" width="25" />
+                        </div>
+                        <div id="theNextNextDayConditiondsEl" class="h6 text-white">
+                            <p id="theNextNextDayTempEl" class="card-text "></p>
+                            <p id="theNextNextDayWindSpeedEl" class="card-text"></p>
+                            <p id="theNextNextDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theNextNextDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-four" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
                     </div>
-                    <div id="theNextNextNextDayEl" class="col-2 bg-info card h4 mt-4">
-                        <h3>Hello</h3>
+                    <div id="theNextNextNextDayEl" class="col-12 col-md-2 bg-info card mt-1">
+                        <div id="theNextNextNextDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
+                            <h5 id="theNextNextNextDateEl" class="card-text font-weight-bold text-white">Day 5</h5>
+                            <img id="theNextNextNextDayWeatherIconEl" class="d-none ml-1 mt-0" height="25" width="25" />
+                        </div>
+                        <div id="theNextNextNextDayConditiondsEl" class="h6 text-white">
+                            <p id="theNextNextNextDayTempEl" class="card-text "></p>
+                            <p id="theNextNextNextDayWindSpeedEl" class="card-text"></p>
+                            <p id="theNextNextNextDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theNextNextNextDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-five" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
                     </div>
-                    <div id="theFinalDayEl"class="col-2 bg-info card h4 mt-4">
-                        <h3>Hello</h3>
+                    <div id="theFinalDayEl"class="col-12 col-md-2 bg-info card mt-1">
+                        <div id="theFinalDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
+                            <h5 id="theFinalDateEl" class="card-text font-weight-bold text-white">Day 6</h5>
+                            <img id="theFinalDayWeatherIconEl" class="d-none ml-1 mt-0" height="25" width="25" />
+                        </div>
+                        <div id="theFinalDayConditiondsEl" class="h6 text-white">
+                            <p id="theFinalDayTempEl" class="card-text "></p>
+                            <p id="theFinalDayWindSpeedEl" class="card-text"></p>
+                            <p id="theFinalDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theFinalDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-six" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
