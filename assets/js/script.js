@@ -15,21 +15,23 @@ let futureWeatherArray = [];
 
 // accesses local storage to show searched for cities as buttons on the page
 function searchedCities() {
-    for (let i = 0; i < localStorage.length; i++) {
-        let cityButtonEl = document.createElement('button');
-        cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
-        cityButtonEl.textContent = JSON.parse(localStorage.key(i));
-        citiesSearchedContainerEl.appendChild(cityButtonEl);
-
-        // together with the event listener below, this function allows the user to see a searched-for city's weather again
-        function searchedCurrentWeather() {
-            let cityName = cityButtonEl.textContent;
-
-            getCityWeather(cityName);
-            currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
+    if (localStorage) {
+        for (let i = 0; i < localStorage.length; i++) {
+            let cityButtonEl = document.createElement('button');
+            cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
+            cityButtonEl.textContent = JSON.parse(localStorage.key(i));
+            citiesSearchedContainerEl.appendChild(cityButtonEl);
+    
+            // together with the event listener below, this function allows the user to see a searched-for city's weather again
+            function searchedCurrentWeather() {
+                let cityName = cityButtonEl.textContent;
+    
+                getCityWeather(cityName);
+                currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
+            }
+    
+            cityButtonEl.addEventListener('click', searchedCurrentWeather);
         }
-
-        cityButtonEl.addEventListener('click', searchedCurrentWeather);
     }
 }
 
