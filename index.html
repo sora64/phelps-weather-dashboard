@@ -4,38 +4,143 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link to Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Weather Dashboard</title>
 </head>
 <body>
     <div id="headerContainer" class="row">
-        <header id="header" class=" bg-primary text-center col-12">
+        <header id="header" class="bg-info text-center col-12">
             <h1 id="headerText" class="my-0 p-3 h1 font-weight-bold text-white">Weather Dashboard</h1>
         </header>
     </div>
-    <main class="row">
-        <div id="citiesEL" class="col-4 col-md-3 vh-100 text-center">
-            <div id="citySearchEL" class="p-3 border-bottom border-dark">
-                <form class="form-group">
-                    <label for="City Search"><h3>Search for a City:</h3></label>
-                    <textarea id="citySearchInputEl" class="form-control" rows="1"></textarea>
-                </form>
-                <button id="citySearchBtn" class="bg-primary text-center rounded text-light">Search</button>
+    <main class="row bg-light">
+        <!-- left-side search container -->
+        <div id="citiesEL" class="col-12 col-lg-3 vh-25 vh-lg-100 my-4">
+            <div id ="citySearch El" class="card border border-dark m-4">
+                    <form id ="cityForm" class="card-body">
+                        <label class="form-label" for="cityname"><h3 class="card-text font-weight-bold">Search for a City:</h3></label>
+                        <input name= "cityname" id="cityname" class="form-control font-weight-bold text-center mb-2" placeholder="San Diego"/>
+                        <button type="submit" class="btn bg-info text-center w-100 text-light font-weight-bold">Search</button>
+                    </form>
             </div>
-            <div id="citiesSearchedContainer" class="my-4">
-                <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
-            </div>
+            <div id="searchContainer" class="card border border-dark text-center m-4">
+                <div id="mostRecentSearchContainer">
+                    <!-- Container for the city just searched -->                
+                </div>
+                <div id="citiesSearchedContainer" class="text-center">
+                    <!-- Cities already searched for will be displayed here as buttons that, when clicked, will bring up the relevant weather information -->
+                </div>
+            </div>   
         </div>
-        <div id="weatherContainer" class="col-8 col-md-9 bg-danger vh-100">
-            <div id="currentWeather" class="mt-5 mb-3 mx-auto w-75 h-25 bg-success">
-                <!-- Weather right now for the currently searched-for city -->
+        <!-- container for current and forecasted weather elements -->
+        <div id="weatherContainer" class=" col-12 col-lg-9 ml-3 mx-lg-auto">
+            <!-- Weather right now for the currently searched-for city -->
+            <div id="currentWeather" class="border border-dark card mt-2 mt-lg-5 mb-3 mr-4 mr-lg-5 mh50">
+                <div id="currentWeatherHeaderEL" class="inline-block bg-dark card-header d-flex flex-row">
+                    <h4 id="currentWeatherCityEl" class="card-text font-weight-bold text-white">City:</h4>
+                    <img id="currentWeatherIconEl" class="d-none ml-1 mt-0" height="35" width="35" />
+                </div>
+                <div id="currentConditionsEl" class="h4 card-body bg-light">
+                    <p id="currentTempEl" class="card-text"></p>
+                    <p id="currentWindSpeedEl" class="card-text"></p>
+                    <p id="currentHumidityEl" class="card-text"></p>
+                    <div class="card-text inline-block d-flex flex-row">
+                        <p id="currentUVI" class="mr-1"></p>
+                        <p id="uvi-value" class="rounded card text-white border border-dark px-1 text-center" width="100"></p>
+                    </div>
+                </div>  
             </div>
-            <div id="fiveDayForecast" class="row h-25 w-75 mt-4 mx-auto bg-light">
-                <!-- Weather for the next five days for the currently searched-for city -->
+            <!-- Weather for the next five days for the currently searched-for city -->
+            <div id="fiveDayForecast" class="row bg-secondary border border-dark card mh-100 w-100 mt-4 mr-3 mr-lg-4">
+                <h4 class="font-weight-bold card-header bg-dark text-white justify-content-center">5 Day Forecast:</h4>
+                <div class="row card-body bg-light m-2 justify-content-around h-50">
+                    <!-- tomorrow's weather -->
+                    <div id="tomorrowEl" class="col-12 col-lg-2 bg-info card mt-1">
+                        <div id="tomorrowWeatherHeaderEl" class="row mb-2">
+                            <h5 id="tomorrowDateEl" class="col-12 card-text font-weight-bold text-white"></h5>
+                            <img id="tomorrowWeatherIconEl" class="d-none col-4 col-lg-6 ml-4" />
+                        </div>
+                        <div id="tomorrowConditiondsEl" class="h6 text-white">
+                            <p id="tomorrowTempEl" class="card-text "></p>
+                            <p id="tomorrowWindSpeedEl" class="card-text"></p>
+                            <p id="tomorrowHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="tomorrowUVI" class="mr-1"></p>
+                                <p id="uvi-value-two" class="card text-white rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- the day after tomorrow's weather -->
+                    <div id="theNextDayEl" class="col-12 col-lg-2 bg-info card mt-1">
+                        <div id="theNextDayWeatherHeaderEl" class="row mb-2">
+                            <h5 id="theNextDateEl" class="col-12 card-text font-weight-bold text-white"></h5>
+                            <img id="theNextDayWeatherIconEl" class="d-none col-4 col-lg-6 ml-4" />
+                        </div>
+                        <div id="theNextDayConditiondsEl" class="h6 text-white">
+                            <p id="theNextDayTempEl" class="card-text "></p>
+                            <p id="theNextDayWindSpeedEl" class="card-text"></p>
+                            <p id="theNextDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theNextDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-three" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- the weather for three days from today -->
+                    <div id="theNextNextDayEl" class="col-12 col-lg-2 bg-info card mt-1">
+                        <div id="theNextNextDayWeatherHeaderEl" class="row mb-2">
+                            <h5 id="theNextNextDateEl" class="col-12 card-text font-weight-bold text-white"></h5>
+                            <img id="theNextNextDayWeatherIconEl" class="d-none col-4 col-lg-6 ml-4" />
+                        </div>
+                        <div id="theNextNextDayConditiondsEl" class="h6 text-white">
+                            <p id="theNextNextDayTempEl" class="card-text "></p>
+                            <p id="theNextNextDayWindSpeedEl" class="card-text"></p>
+                            <p id="theNextNextDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theNextNextDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-four" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- the weather for four days from today -->
+                    <div id="theNextNextNextDayEl" class="col-12 col-lg-2 bg-info card mt-1">
+                        <div id="theNextNextNextDayWeatherHeaderEl" class="row mb-2">
+                            <h5 id="theNextNextNextDateEl" class="col-12 card-text font-weight-bold text-white"></h5>
+                            <img id="theNextNextNextDayWeatherIconEl" class="d-none col-4 col-lg-6 ml-4" />
+                        </div>
+                        <div id="theNextNextNextDayConditiondsEl" class="h6 text-white">
+                            <p id="theNextNextNextDayTempEl" class="card-text "></p>
+                            <p id="theNextNextNextDayWindSpeedEl" class="card-text"></p>
+                            <p id="theNextNextNextDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theNextNextNextDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-five" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- the weather for five days from today -->
+                    <div id="theFinalDayEl"class="col-12 col-lg-2 bg-info card mt-1">
+                        <div id="theFinalDayWeatherHeaderEl" class="row mb-2">
+                            <h5 id="theFinalDateEl" class="col-12 card-text font-weight-bold text-white"></h5>
+                            <img id="theFinalDayWeatherIconEl" class="d-none col-4 col-lg-6 ml-4" />
+                        </div>
+                        <div id="theFinalDayConditiondsEl" class="h6 text-white">
+                            <p id="theFinalDayTempEl" class="card-text "></p>
+                            <p id="theFinalDayWindSpeedEl" class="card-text"></p>
+                            <p id="theFinalDayHumidityEl" class="card-text"></p>
+                            <div class="card-text inline-block d-flex flex-row">
+                                <p id="theFinalDayUVI" class="mr-1"></p>
+                                <p id="uvi-value-six" class="rounded border border-dark px-1 text-center" width="100"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-
+    <!-- linked JavaScript files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
