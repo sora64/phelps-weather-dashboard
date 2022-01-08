@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link to Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Weather Dashboard</title>
 </head>
@@ -14,6 +15,7 @@
         </header>
     </div>
     <main class="row bg-light">
+        <!-- left-side search container -->
         <div id="citiesEL" class="col-12 col-lg-3 vh-25 vh-lg-100 my-4">
             <div id ="citySearch El" class="card border border-dark m-4">
                     <form id ="cityForm" class="card-body">
@@ -31,9 +33,10 @@
                 </div>
             </div>   
         </div>
+        <!-- container for current and forecasted weather elements -->
         <div id="weatherContainer" class=" col-12 col-lg-9 ml-3 mx-lg-auto">
+            <!-- Weather right now for the currently searched-for city -->
             <div id="currentWeather" class="border border-dark card mt-2 mt-lg-5 mb-3 mr-4 mr-lg-5 mh50">
-                <!-- Weather right now for the currently searched-for city -->
                 <div id="currentWeatherHeaderEL" class="inline-block bg-dark card-header d-flex flex-row">
                     <h4 id="currentWeatherCityEl" class="card-text font-weight-bold text-white">City:</h4>
                     <img id="currentWeatherIconEl" class="d-none ml-1 mt-0" height="35" width="35" />
@@ -48,10 +51,11 @@
                     </div>
                 </div>  
             </div>
+            <!-- Weather for the next five days for the currently searched-for city -->
             <div id="fiveDayForecast" class="row bg-secondary border border-dark card mh-100 w-100 mt-4 mr-3 mr-lg-4">
                 <h4 class="font-weight-bold card-header bg-dark text-white justify-content-center">5 Day Forecast:</h4>
-                <!-- Weather for the next five days for the currently searched-for city -->
                 <div class="row card-body bg-light m-2 justify-content-around h-50">
+                    <!-- tomorrow's weather -->
                     <div id="tomorrowEl" class="col-12 col-lg-2 bg-info card mt-1">
                         <div id="tomorrowWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
                             <h5 id="tomorrowDateEl" class="card-text font-weight-bold text-white">Day 2</h5>
@@ -67,6 +71,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- the day after tomorrow's weather -->
                     <div id="theNextDayEl" class="col-12 col-lg-2 bg-info card mt-1">
                         <div id="theNextDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
                             <h5 id="theNextDateEl" class="card-text font-weight-bold text-white">Day 3</h5>
@@ -82,6 +87,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- the weather for three days from today -->
                     <div id="theNextNextDayEl" class="col-12 col-lg-2 bg-info card mt-1">
                         <div id="theNextNextDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
                             <h5 id="theNextNextDateEl" class="card-text font-weight-bold text-white">Day 4</h5>
@@ -97,6 +103,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- the weather for four days from today -->
                     <div id="theNextNextNextDayEl" class="col-12 col-lg-2 bg-info card mt-1">
                         <div id="theNextNextNextDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
                             <h5 id="theNextNextNextDateEl" class="card-text font-weight-bold text-white">Day 5</h5>
@@ -112,6 +119,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- the weather for five days from today -->
                     <div id="theFinalDayEl"class="col-12 col-lg-2 bg-info card mt-1">
                         <div id="theFinalDayWeatherHeaderEl" class="inline-block d-flex flex-row mb-2">
                             <h5 id="theFinalDateEl" class="card-text font-weight-bold text-white">Day 6</h5>
@@ -131,6 +139,7 @@
             </div>
         </div>
     </main>
+    <!-- linked JavaScript files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

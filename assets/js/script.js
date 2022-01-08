@@ -1,3 +1,4 @@
+// global dom elements
 const searchContainerEl = document.querySelector('#searchContainer');
 const citySearchInputEl = document.querySelector('#cityname');
 const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
@@ -5,10 +6,12 @@ const cityFormEl = document.querySelector('#cityForm');
 const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
 
+// arrays that functions will push into
 let citiesArray = [];
 let weatherArray = [];
 let futureWeatherArray = [];
 
+// accesses local storage to show searched for cities as buttons on the page
 function searchedCities() {
     for (let i = 0; i < localStorage.length; i++) {
         let cityButtonEl = document.createElement('button');
@@ -16,7 +19,8 @@ function searchedCities() {
         cityButtonEl.textContent = JSON.parse(localStorage.key(i));
         citiesSearchedContainerEl.appendChild(cityButtonEl);
 
-        let searchedCurrentWeather = function() {
+        // together with the event listener below, this function allows the user to see a searched-for city's weather again
+        function searchedCurrentWeather() {
             let cityName = cityButtonEl.textContent;
 
             getCityWeather(cityName);
@@ -27,15 +31,18 @@ function searchedCities() {
     }
 }
 
+// function call for searchedCities() on load
 searchedCities();
 
+// adds a new city button when a new search is performed in the page's city search form
 function addCity() {
     let cityButtonEl = document.createElement('button');
     cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
     cityButtonEl.textContent = citySearchInputEl.value;
     mostRecentSearchContainerEL.appendChild(cityButtonEl);
 
-    let addCityCurrentWeather = function() {
+    // together with the event listener below, this function allows the user to see a just-searched-for city's weather again if they click back to it after clicking on an older searched-for city's button
+    function addCityCurrentWeather() {
         let cityName = cityButtonEl.textContent;
 
         getCityWeather(cityName);
@@ -46,6 +53,7 @@ function addCity() {
     cityButtonEl.addEventListener('click', addCityCurrentWeather);
 }
 
+// uses OpenWeatherMap to access weather data for cities input by the user 
 function getCityWeather(city) {
     // formate the OpenWeather api url
     let apiUrlOne = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=26e14b1e1bdcd3e4a900e722776adf30";
@@ -82,6 +90,7 @@ function getCityWeather(city) {
     })
 }
 
+// tells the page what to do when the user searches for a city using the page's form
 function formSubmitHandler(event) {
     event.preventDefault();
 
@@ -98,6 +107,7 @@ function formSubmitHandler(event) {
     }
 }
 
+// uses the data from getCityWeather() to display a city's current weather conditions
 function displayCurrentWeather(data) {
     // current weather element variables
     const currentWeatherIconEl = document.querySelector('#currentWeatherIconEl');
@@ -107,17 +117,26 @@ function displayCurrentWeather(data) {
     const currentUVIEl = document.querySelector('#currentUVI');
     const currentUVIValueEL = document.querySelector('#uvi-value');
 
+    // pushes data from getCityWeather() to the weatherArray variable
     weatherArray.push({ 'weather': data });
+
+    // variable representing a city's current weather conditions
     let currentConditions = weatherArray.pop().weather.current;
+
+    // variables for each of the desired individual current weather conditions
     let currentTemperature = currentConditions.temp;
     let currentWindSpeed = currentConditions.wind_speed;
     let currentHumidity = currentConditions.humidity;
     let currentUVI = currentConditions.uvi;
+
+    // tells the page what to display in the current weater element when a search is performed
     currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
     currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
     currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
     currentUVIEl.textContent = 'UVI: ';
     currentUVIValueEL.textContent = currentUVI;
+
+    // checks to see if the UVI value is in the safe, moderate, or severe categories
     if (currentUVI <= 2) {
         currentUVIValueEL.classList.remove('bg-warning');
         currentUVIValueEL.classList.remove('bg-danger');
@@ -131,14 +150,19 @@ function displayCurrentWeather(data) {
         currentUVIValueEL.classList.remove('bg-success');
         currentUVIValueEL.classList.add('bg-danger');
     };
+
+    // sets an icon that summarizes the current weather
     let currentWeatherIcon = currentConditions.weather[0].icon;
     currentWeatherIconEl.src = "http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
     currentWeatherIconEl.classList.remove('d-none');
 }
 
+// uses the data from getCityWeather() to display a city's weather conditions over the next five days
 function displayForecast(data) {
     futureWeatherArray.push({ 'weather': data });
     let futureConditions = futureWeatherArray.pop().weather.daily;
+
+    // functions for displaying each of a city's desired individual weather conditions, defined globally below
     forecastedTemperatures(futureConditions);
     forecastedWindSpeeds(futureConditions);
     forecastedHumidity(futureConditions);
@@ -146,6 +170,7 @@ function displayForecast(data) {
     forecastedIcons(futureConditions);
 }
 
+// displays temperature data for a city over the next five days
 function forecastedTemperatures(futureConditions) {
 
     let tommorrowTemp = futureConditions[0].temp.day;
@@ -169,6 +194,7 @@ function forecastedTemperatures(futureConditions) {
     theFinalDayTempValue.textContent = 'Temp: ' + theFinalDayTemp + '° F';
 }
 
+// displays wind speed data for a city over the next five days
 function forecastedWindSpeeds(futureConditions) {
 
     let tommorrowWindSpeed = futureConditions[0].wind_speed;
@@ -192,6 +218,7 @@ function forecastedWindSpeeds(futureConditions) {
     theFinalDayWindSpeedValue.textContent = 'Wind Speed: ' + theFinalDayWindSpeed+ ' MPH';
 }
 
+// displays humidity data for a city over the next five days
 function forecastedHumidity(futureConditions) {
 
     let tomorrowHumidity = futureConditions[0].humidity;
@@ -215,6 +242,7 @@ function forecastedHumidity(futureConditions) {
     theFinalDayHumidityValue.textContent = 'Humidity: ' + theFinalDayHumidity + '%';
 }
 
+// displays UVI data for a city over the next five days
 function forecastedUVI(futureConditions) {
 
     const uviTomorrowText = document.getElementById('tomorrowUVI');
@@ -232,6 +260,7 @@ function forecastedUVI(futureConditions) {
     const uviTheFinalDayText = document.getElementById('theFinalDayUVI');
     uviTheFinalDayText.textContent = 'UVI: ';
 
+    // functions that check the severity of a UVI value, defined locally below
     getTomorrowUVI();  
     getTheNextDayUVI();
     getTheNextNextDayUVI();
@@ -334,6 +363,7 @@ function forecastedUVI(futureConditions) {
     }
 }
 
+// sets icons that summarize the forecasted weather for a city for each of the next five days
 function forecastedIcons(futureConditions) {
 
     const tomorrowWeatherIconEl = document.getElementById('tomorrowWeatherIconEl');
@@ -362,4 +392,5 @@ function forecastedIcons(futureConditions) {
     theFinalDayWeatherIconEl.classList.remove('d-none');
 }
 
+// causes the page functionality to work when the user submits a new search to the page's form
 cityFormEl.addEventListener('submit', formSubmitHandler);   
