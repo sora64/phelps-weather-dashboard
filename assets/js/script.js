@@ -4,6 +4,8 @@ const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
 const cityFormEl = document.querySelector('#cityForm');
 const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
+const currentDate = moment().format('L');
+
 
 let citiesArray = [];
 let weatherArray = [];
@@ -20,7 +22,7 @@ function searchedCities() {
             let cityName = cityButtonEl.textContent;
 
             getCityWeather(cityName);
-            currentWeatherCityEL.textContent = 'Currently in ' + cityName + ':';
+            currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
         }
 
         cityButtonEl.addEventListener('click', searchedCurrentWeather);
@@ -39,7 +41,7 @@ function addCity() {
         let cityName = cityButtonEl.textContent;
 
         getCityWeather(cityName);
-        currentWeatherCityEL.textContent = 'Currently in ' + cityName + ':';
+        currentWeatherCityEL.textContent = citySearchInputEl.value + ' ' + '(' + currentDate + ')';
     }
         
 
@@ -90,7 +92,7 @@ function formSubmitHandler(event) {
     if (cityName) {
         localStorage.setItem(JSON.stringify(cityName), JSON.stringify(cityName));
         getCityWeather(cityName);
-        currentWeatherCityEL.textContent = 'Currently in ' + citySearchInputEl.value + ':';
+        currentWeatherCityEL.textContent = citySearchInputEl.value + ' ' + '(' + currentDate + ')';
         addCity();
         citySearchInputEl.value = '';
     } else {
@@ -108,11 +110,13 @@ function displayCurrentWeather(data) {
     const currentUVIValueEL = document.querySelector('#uvi-value');
 
     weatherArray.push({ 'weather': data });
+
     let currentConditions = weatherArray.pop().weather.current;
     let currentTemperature = currentConditions.temp;
     let currentWindSpeed = currentConditions.wind_speed;
     let currentHumidity = currentConditions.humidity;
     let currentUVI = currentConditions.uvi;
+
     currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
     currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
     currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
@@ -131,6 +135,7 @@ function displayCurrentWeather(data) {
         currentUVIValueEL.classList.remove('bg-success');
         currentUVIValueEL.classList.add('bg-danger');
     };
+
     let currentWeatherIcon = currentConditions.weather[0].icon;
     currentWeatherIconEl.src = "http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
     currentWeatherIconEl.classList.remove('d-none');
@@ -144,6 +149,7 @@ function displayForecast(data) {
     forecastedHumidity(futureConditions);
     forecastedUVI(futureConditions);
     forecastedIcons(futureConditions);
+    displayForecastedDates();
 }
 
 function forecastedTemperatures(futureConditions) {
@@ -360,6 +366,23 @@ function forecastedIcons(futureConditions) {
     let theFinalDayWeatherIcon = futureConditions[4].weather[0].icon;
     theFinalDayWeatherIconEl.src = "http://openweathermap.org/img/wn/" + theFinalDayWeatherIcon + "@2x.png";
     theFinalDayWeatherIconEl.classList.remove('d-none');
+}
+
+function displayForecastedDates() {
+    const tomorrowDateEl = document.getElementById('tomorrowDateEl');
+    tomorrowDateEl.textContent = moment().add(1, 'days').format('L');
+
+    const theNextDateEl = document.getElementById('theNextDateEl');
+    theNextDateEl.textContent = moment().add(2, 'days').format('L');
+
+    const theNextNextDateEl = document.getElementById('theNextNextDateEl');
+    theNextNextDateEl.textContent = moment().add(3, 'days').format('L');
+
+    const theNextNextNextDateEl = document.getElementById('theNextNextNextDateEl');
+    theNextNextNextDateEl.textContent = moment().add(4, 'days').format('L');
+
+    const theFinalDateEl = document.getElementById('theFinalDateEl');
+    theFinalDateEl.textContent = moment().add(5, 'days').format('L');
 }
 
 cityFormEl.addEventListener('submit', formSubmitHandler);   
