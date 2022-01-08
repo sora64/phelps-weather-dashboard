@@ -15,28 +15,27 @@ let futureWeatherArray = [];
 
 // accesses local storage to show searched for cities as buttons on the page
 function searchedCities() {
-    if (localStorage) {
-        for (let i = 0; i < localStorage.length; i++) {
-            let cityButtonEl = document.createElement('button');
-            cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
-            cityButtonEl.textContent = JSON.parse(localStorage.key(i));
-            citiesSearchedContainerEl.appendChild(cityButtonEl);
-    
-            // together with the event listener below, this function allows the user to see a searched-for city's weather again
-            function searchedCurrentWeather() {
-                let cityName = cityButtonEl.textContent;
-    
-                getCityWeather(cityName);
-                currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
-            }
-    
-            cityButtonEl.addEventListener('click', searchedCurrentWeather);
+    for (let i = 0; i < localStorage.length; i++) {
+        let cityButtonEl = document.createElement('button');
+        cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
+        JSON.stringify(localStorage.key(i));
+        cityButtonEl.textContent = JSON.parse(localStorage.key(i));
+        citiesSearchedContainerEl.appendChild(cityButtonEl);
+
+        // together with the event listener below, this function allows the user to see a searched-for city's weather again
+        function searchedCurrentWeather() {
+            let cityName = cityButtonEl.textContent;
+
+            getCityWeather(cityName);
+            currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
         }
+
+        cityButtonEl.addEventListener('click', searchedCurrentWeather);
     }
 }
 
 // function call for searchedCities() on load
-searchedCities();
+    searchedCities();
 
 // adds a new city button when a new search is performed in the page's city search form
 function addCity() {
