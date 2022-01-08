@@ -18,7 +18,7 @@ function searchedCities() {
     for (let i = 0; i < localStorage.length; i++) {
         let cityButtonEl = document.createElement('button');
         cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
-        storedCities = JSON.parse(localStorage.getItem((localStorage.key(i))));
+        storedCities = JSON.parse(localStorage.getItem(localStorage.key(i)));
         console.log(storedCities);
         cityButtonEl.textContent = storedCities;
         console.log(cityButtonEl.textContent);
