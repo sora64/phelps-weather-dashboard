@@ -5,6 +5,8 @@ const currentWeatherCityEL = document.querySelector('#currentWeatherCityEl');
 const cityFormEl = document.querySelector('#cityForm');
 const mostRecentSearchContainerEL = document.querySelector('#mostRecentSearchContainer');
 const citiesSearchedContainerEl = document.querySelector('#citiesSearchedContainer');
+const currentDate = moment().format('L');
+
 
 // arrays that functions will push into
 let citiesArray = [];
@@ -24,7 +26,7 @@ function searchedCities() {
             let cityName = cityButtonEl.textContent;
 
             getCityWeather(cityName);
-            currentWeatherCityEL.textContent = 'Currently in ' + cityName + ':';
+            currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
         }
 
         cityButtonEl.addEventListener('click', searchedCurrentWeather);
@@ -46,7 +48,7 @@ function addCity() {
         let cityName = cityButtonEl.textContent;
 
         getCityWeather(cityName);
-        currentWeatherCityEL.textContent = 'Currently in ' + cityName + ':';
+        currentWeatherCityEL.textContent = citySearchInputEl.value + ' ' + '(' + currentDate + ')';
     }
         
 
@@ -99,7 +101,7 @@ function formSubmitHandler(event) {
     if (cityName) {
         localStorage.setItem(JSON.stringify(cityName), JSON.stringify(cityName));
         getCityWeather(cityName);
-        currentWeatherCityEL.textContent = 'Currently in ' + citySearchInputEl.value + ':';
+        currentWeatherCityEL.textContent = citySearchInputEl.value + ' ' + '(' + currentDate + ')';
         addCity();
         citySearchInputEl.value = '';
     } else {
@@ -120,7 +122,10 @@ function displayCurrentWeather(data) {
     // pushes data from getCityWeather() to the weatherArray variable
     weatherArray.push({ 'weather': data });
 
+<<<<<<< HEAD
     // variable representing a city's current weather conditions
+=======
+>>>>>>> feature/dates
     let currentConditions = weatherArray.pop().weather.current;
 
     // variables for each of the desired individual current weather conditions
@@ -129,7 +134,10 @@ function displayCurrentWeather(data) {
     let currentHumidity = currentConditions.humidity;
     let currentUVI = currentConditions.uvi;
 
+<<<<<<< HEAD
     // tells the page what to display in the current weater element when a search is performed
+=======
+>>>>>>> feature/dates
     currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
     currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
     currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
@@ -151,7 +159,10 @@ function displayCurrentWeather(data) {
         currentUVIValueEL.classList.add('bg-danger');
     };
 
+<<<<<<< HEAD
     // sets an icon that summarizes the current weather
+=======
+>>>>>>> feature/dates
     let currentWeatherIcon = currentConditions.weather[0].icon;
     currentWeatherIconEl.src = "http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
     currentWeatherIconEl.classList.remove('d-none');
@@ -168,6 +179,7 @@ function displayForecast(data) {
     forecastedHumidity(futureConditions);
     forecastedUVI(futureConditions);
     forecastedIcons(futureConditions);
+    displayForecastedDates();
 }
 
 // displays temperature data for a city over the next five days
@@ -392,5 +404,25 @@ function forecastedIcons(futureConditions) {
     theFinalDayWeatherIconEl.classList.remove('d-none');
 }
 
+<<<<<<< HEAD
 // causes the page functionality to work when the user submits a new search to the page's form
+=======
+function displayForecastedDates() {
+    const tomorrowDateEl = document.getElementById('tomorrowDateEl');
+    tomorrowDateEl.textContent = moment().add(1, 'days').format('L');
+
+    const theNextDateEl = document.getElementById('theNextDateEl');
+    theNextDateEl.textContent = moment().add(2, 'days').format('L');
+
+    const theNextNextDateEl = document.getElementById('theNextNextDateEl');
+    theNextNextDateEl.textContent = moment().add(3, 'days').format('L');
+
+    const theNextNextNextDateEl = document.getElementById('theNextNextNextDateEl');
+    theNextNextNextDateEl.textContent = moment().add(4, 'days').format('L');
+
+    const theFinalDateEl = document.getElementById('theFinalDateEl');
+    theFinalDateEl.textContent = moment().add(5, 'days').format('L');
+}
+
+>>>>>>> feature/dates
 cityFormEl.addEventListener('submit', formSubmitHandler);   
