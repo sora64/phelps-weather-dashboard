@@ -48,7 +48,7 @@ function addCity() {
         let cityName = cityButtonEl.textContent;
 
         getCityWeather(cityName);
-        currentWeatherCityEL.textContent = citySearchInputEl.value + ' ' + '(' + currentDate + ')';
+        currentWeatherCityEL.textContent = cityName + ' ' + '(' + currentDate + ')';
     }
         
 
