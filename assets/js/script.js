@@ -18,8 +18,10 @@ function searchedCities() {
     for (let i = 0; i < localStorage.length; i++) {
         let cityButtonEl = document.createElement('button');
         cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
-        JSON.stringify(localStorage.key(i));
-        cityButtonEl.textContent = JSON.parse(localStorage.key(i));
+        storedCities = JSON.parse(localStorage.getItem((localStorage.key(i))));
+        console.log(storedCities);
+        cityButtonEl.textContent = storedCities;
+        console.log(cityButtonEl.textContent);
         citiesSearchedContainerEl.appendChild(cityButtonEl);
 
         // together with the event listener below, this function allows the user to see a searched-for city's weather again
