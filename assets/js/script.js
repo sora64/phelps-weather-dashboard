@@ -122,10 +122,6 @@ function displayCurrentWeather(data) {
     // pushes data from getCityWeather() to the weatherArray variable
     weatherArray.push({ 'weather': data });
 
-<<<<<<< HEAD
-    // variable representing a city's current weather conditions
-=======
->>>>>>> feature/dates
     let currentConditions = weatherArray.pop().weather.current;
 
     // variables for each of the desired individual current weather conditions
@@ -134,10 +130,6 @@ function displayCurrentWeather(data) {
     let currentHumidity = currentConditions.humidity;
     let currentUVI = currentConditions.uvi;
 
-<<<<<<< HEAD
-    // tells the page what to display in the current weater element when a search is performed
-=======
->>>>>>> feature/dates
     currentTemperatureEl.textContent = 'Temp: ' + currentTemperature + '° F';
     currentWindSpeedEl.textContent = 'Wind Speed: ' + currentWindSpeed + ' MPH';
     currentHumidityEl.textContent = 'Humidity: ' + currentHumidity + '%';
@@ -159,10 +151,6 @@ function displayCurrentWeather(data) {
         currentUVIValueEL.classList.add('bg-danger');
     };
 
-<<<<<<< HEAD
-    // sets an icon that summarizes the current weather
-=======
->>>>>>> feature/dates
     let currentWeatherIcon = currentConditions.weather[0].icon;
     currentWeatherIconEl.src = "http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
     currentWeatherIconEl.classList.remove('d-none');
@@ -404,9 +392,6 @@ function forecastedIcons(futureConditions) {
     theFinalDayWeatherIconEl.classList.remove('d-none');
 }
 
-<<<<<<< HEAD
-// causes the page functionality to work when the user submits a new search to the page's form
-=======
 function displayForecastedDates() {
     const tomorrowDateEl = document.getElementById('tomorrowDateEl');
     tomorrowDateEl.textContent = moment().add(1, 'days').format('L');
@@ -424,5 +409,4 @@ function displayForecastedDates() {
     theFinalDateEl.textContent = moment().add(5, 'days').format('L');
 }
 
->>>>>>> feature/dates
 cityFormEl.addEventListener('submit', formSubmitHandler);   
