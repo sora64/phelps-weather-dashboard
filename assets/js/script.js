@@ -18,7 +18,7 @@ function searchedCities() {
     for (let i = 0; i < localStorage.length; i++) {
         let cityButtonEl = document.createElement('button');
         cityButtonEl.classList = 'btn m-1 w-75 text-white font-weight-bold bg-dark';
-        storedCities = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        let storedCities = JSON.parse(localStorage.getItem(localStorage.key(i)));
         console.log(storedCities);
         cityButtonEl.textContent = storedCities;
         console.log(cityButtonEl.textContent);
@@ -37,7 +37,7 @@ function searchedCities() {
 }
 
 // function call for searchedCities() on load
-    searchedCities();
+searchedCities();
 
 // adds a new city button when a new search is performed in the page's city search form
 function addCity() {
@@ -90,7 +90,7 @@ function getCityWeather(city) {
                 })
             })
         } else {
-            alert ('Error: City Not Found!')
+            alert ('Error: City Not Found!');
         }
     })
 }
