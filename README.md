@@ -8,6 +8,6 @@
 * have a city's current and future weather conditions displayed in a manner organized cleanly by date (also displayed) on the webpage.
 * click on buttons representing cities they've searched for just now or earlier to see those cities' weather conditions again.
 
-[Link to Deployed Application](https://sora64.github.io/weather-dashboard/)
+[Link to Deployed Application](https://sora64.github.io/phelps-weather-dashboard-challenge/)
 
 ![Screnshot of Deployed Application](./assets/weatherDashboardScreenshot.png)
